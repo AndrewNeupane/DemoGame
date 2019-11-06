@@ -13,12 +13,12 @@ namespace ItSutra.DemoGame.Game
         public TimeSpan Duration { get; set; }
         public MatchState State { get; set; }
         public int FirstPlayerId { get; set; }
-
         public int SecondPlayerId { get; set; }
+        public GamePiece FirstPlayerGamePiece { get; set; }
         public int WinningPlayerId { get; set; }
+
         public virtual Player FirstPlayer { get; set; }
         public virtual Player SecondPlayer { get; set; }
-        public GamePiece FirstPlayerGamePiece { get; set; }
 
         [ForeignKey(nameof(WinningPlayerId))]
         public virtual Player WinningPlayer { get; set; }

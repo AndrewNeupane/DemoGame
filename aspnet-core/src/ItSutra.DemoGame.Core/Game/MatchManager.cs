@@ -24,9 +24,20 @@ namespace ItSutra.DemoGame.Game
 
         public async Task<ListResultDto<Match>> GetMatchList(EntityDto input)
         {
-            var matchLists = await _repositoryMatch
-               .GetAllIncluding(m => m.gamePlayers)
-               .FirstOrDefaultAsync(p => p.Id == input.Id); 
+            var matchLists = await _repositoryMatch.GetAllListAsync();
+              
+
+
+
+           //  list of matches / match id startTime, endtime, duration, player1,player 2
+
+           
+
+
+
+
+
+
 
             return new ListResultDto<Match>(ObjectMapper.Map<List<Match>>(matchLists));
         }

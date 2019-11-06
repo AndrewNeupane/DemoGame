@@ -21,7 +21,7 @@ namespace ItSutra.DemoGame.GameService
         }
         public async Task CreatePlayer(PlayerInput input)
         {
-
+            // if same player exists with  phone Number or email address
             // return validation errors to the user
             var createPlayer = ObjectMapper.Map<Player>(input);
             await _playerRepository.InsertAsync(createPlayer);
@@ -32,18 +32,20 @@ namespace ItSutra.DemoGame.GameService
             await _playerRepository.DeleteAsync(id);
         }
 
-        public async Task<ListResultDto<PlayerListItem>> GetPlayerAsync(GetPlayerInput input)
-        {
+        public async Task<ListResultDto<PlayerListItem>> GetPlayersAsync(GetPlayerInput input)
+        { 
+            // filter by name , phone number , email address
             var playerLists = await _playerRepository
                .GetAll()
                .Where(
-                    p => p.Id.ToString().Contains(input.Filter)
+                    p => p.FirstName.ToString().Contains(input.Filter)
                 )
                 .ToListAsync();
 
             return new ListResultDto<PlayerListItem>(ObjectMapper.Map<List<PlayerListItem>>(playerLists));
         }
 
+        // return a dto
         public async Task GetPlayerById(int id)
         {
             await _playerRepository.GetAsync(id);
