@@ -31,4 +31,9 @@
     <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

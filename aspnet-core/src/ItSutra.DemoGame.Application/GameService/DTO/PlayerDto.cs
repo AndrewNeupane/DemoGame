@@ -8,7 +8,7 @@ using System.Text;
 namespace ItSutra.DemoGame.GameService.DTO
 {
     [AutoMap(typeof(Player))]
-    public class PlayerListOutput :FullAuditedEntity
+    public class PlayerListItem :FullAuditedEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

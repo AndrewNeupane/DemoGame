@@ -1,19 +1,29 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ItSutra.DemoGame.Game
 {
     public class Match : FullAuditedEntity
     {
-        public bool Player1Status { get; set; }
-        public bool Player2Status { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public TimeSpan Difference { get; set; }
-        public TaskState State { get; set; }
-        public virtual ICollection<Player> gamePlayers { get; set; }
+        public TimeSpan Duration { get; set; }
+        public MatchState State { get; set; }
+        public int FirstPlayerId { get; set; }
+
+        public int SecondPlayerId { get; set; }
+        public int WinningPlayerId { get; set; }
+        public virtual Player FirstPlayer { get; set; }
+        public virtual Player SecondPlayer { get; set; }
+        public GamePiece FirstPlayerGamePiece { get; set; }
+
+        [ForeignKey(nameof(WinningPlayerId))]
+        public virtual Player WinningPlayer { get; set; }
+
+        public virtual ICollection<MatchMove> MatchMoves { get; set; }
 
         public Match()
         {
@@ -30,7 +40,12 @@ namespace ItSutra.DemoGame.Game
         }
     }
 
-    public enum TaskState : byte
+    public enum GamePiece
+    {
+        Circle,
+        Square
+    }
+    public enum MatchState : byte
     {
         Open = 0,
         Completed = 1

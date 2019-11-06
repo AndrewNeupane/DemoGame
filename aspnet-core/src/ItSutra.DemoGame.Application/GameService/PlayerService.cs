@@ -19,18 +19,20 @@ namespace ItSutra.DemoGame.GameService
         {
             _playerRepository = playerRepository;
         }
-        public async Task CreatePlayer(CreatePlayerInput input)
+        public async Task CreatePlayer(PlayerInput input)
         {
+
+            // return validation errors to the user
             var createPlayer = ObjectMapper.Map<Player>(input);
             await _playerRepository.InsertAsync(createPlayer);
         }
 
-        public async Task DeletePlayer(EntityDto input)
+        public async Task DeletePlayer(int id)
         {
-            await _playerRepository.DeleteAsync(input.Id);
+            await _playerRepository.DeleteAsync(id);
         }
 
-        public async Task<ListResultDto<PlayerListOutput>> GetPlayerAsync(GetPlayerInput input)
+        public async Task<ListResultDto<PlayerListItem>> GetPlayerAsync(GetPlayerInput input)
         {
             var playerLists = await _playerRepository
                .GetAll()
@@ -39,16 +41,17 @@ namespace ItSutra.DemoGame.GameService
                 )
                 .ToListAsync();
 
-            return new ListResultDto<PlayerListOutput>(ObjectMapper.Map<List<PlayerListOutput>>(playerLists));
+            return new ListResultDto<PlayerListItem>(ObjectMapper.Map<List<PlayerListItem>>(playerLists));
         }
 
-        public async Task GetPlayerById(EntityDto input)
+        public async Task GetPlayerById(int id)
         {
-            await _playerRepository.GetAsync(input.Id);
+            await _playerRepository.GetAsync(id);
         }
 
-        public async Task UpdatePlayer(UpdatePlayerOutput input)
+        public async Task UpdatePlayer(PlayerInput input)
         {
+            // return validation errors to the user
             var updatePlayer = ObjectMapper.Map<Player>(input);
             await _playerRepository.UpdateAsync(updatePlayer);
         }

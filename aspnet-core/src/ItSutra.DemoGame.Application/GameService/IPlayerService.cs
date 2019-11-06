@@ -10,7 +10,7 @@ namespace ItSutra.DemoGame.GameService
 {
     public interface IPlayerService : IApplicationService
     {
-        Task<ListResultDto<PlayerListOutput>> GetPlayerAsync(GetPlayerInput input);
+        Task<ListResultDto<PlayerListItem>> GetPlayerAsync(GetPlayerInput input);
 
         Task CreatePlayer(CreatePlayerInput input);
 
